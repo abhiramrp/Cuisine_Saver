@@ -8,3 +8,19 @@ services:
       - 8000:8000
     env_file:
       - ./.env.dev
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=cuisine_saver
+      - POSTGRES_PASSWORD=cuisine_saver
+      - POSTGRES_DB=cuisine_saver_dev
+
+volumes:
+  postgres_data:
+
+# docker-compose up -d --build
+# docker-compose exec web python3 manage.py migrate --noinput
+# docker-compose exec db psql --username=cuisine_saver --dbname=cuisine_saver_dev
+# docker volume inspect django-on-docker_postgres_data
